@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template, url_for
+import csv_functions
 
 app = Flask(__name__)
 
@@ -25,16 +26,13 @@ def user_info(name, age):
 '''
 @app.route('/tasks/')
 def tasks():
-    tasks = [
-        'сделать 1',
-        'сделать 2',
-        'сделать 3',
-        'сделать 4',
-        'сделать 5',
-    ]
-
+    tasks = csv_functions.read_rows_from_csv('db.csv')
     return render_template('index.html', tasks=tasks)
 
+@app.route('/tasks/del/<int:id>')
+def del_task(id):
+    csv_functions.delete_task_by_id('db.csv', id)
+    return 'задача удалена'
 
 if __name__ == '__main__':
     app.run(debug=True)
