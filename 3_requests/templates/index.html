@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <title>Задачи на день</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+  </head>
+  <body>
+  <div class="container">
+    <h1>Текущие задачи</h1>
+    <h1>{{ w }}</h1>
+    <ul id="todo-list">
+
+      {% for task in tasks %}
+
+        <li>
+          <input class='checkbox' type='checkbox' />
+          {{ task[1] }}
+          <a class="remove" href="/tasks/del/{{ task[0] }}">X</a>
+          <hr />
+        </li>
+
+      {% endfor %}
+
+    </ul>
+    <!-- 
+      action - куда отправить запрос
+      method - тип запроса (обычно GET или POST)
+    -->
+    <form id="todo-add" action="{{ url_for('create_task') }}" method="POST">
+      <!-- name - ключ для POST запроса -->
+      <input name="description" type="text" id="new-todo-description" class="form-control"/>
+      <button class="add" type="submit">+</button>
+    </form>
+  </div>
+  </body>
+
+</html>
