@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Edit task
+{% endblock %}
+
+{% block content %}
+<form action="/tasks/edit/{{ task[0] }}" method="POST">
+    <!-- name - ключ для POST запроса -->
+    <input name="description" type="text" class="form-control" value="{{ task[1] }}">
+    <button class="add" type="submit">Save</button>
+</form>
+{% endblock %}

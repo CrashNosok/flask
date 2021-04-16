@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Текущие задачи
+{% endblock %}
+
+{% block content %}
+<ul id="todo-list">
+
+    {% for task in tasks %}
+
+      <li>
+        <input class='checkbox' type='checkbox' />
+        <a class="edit" href="/tasks/edit/{{ task[0] }}">{{ task[1] }}</a>
+        <a class="remove" href="/tasks/del/{{ task[0] }}">X</a>
+        <hr/>
+      </li>
+
+    {% endfor %}
+
+</ul>
+
+
+<form id="todo-add" action="{{url_for('create_task')}}" method="POST">
+  <!-- name - ключ для POST запроса -->
+  <input name="description" type="text" id="new-todo-description" class="form-control"/>
+  <button class="add" type="submit">+</button>
+</form>
+{% endblock %}
